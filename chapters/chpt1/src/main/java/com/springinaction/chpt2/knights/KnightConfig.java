@@ -1,4 +1,4 @@
-package com.springinaction.knights;
+package com.springinaction.chpt2.knights;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

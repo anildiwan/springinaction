@@ -1,4 +1,4 @@
-package com.springinaction.knights;
+package com.springinaction.chpt2.knights;
 
 public interface Knight {
     void embarkOnQuest ();
