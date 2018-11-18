@@ -12,6 +12,7 @@
         <module>parent</module>
         <module>chapters/chpt1</module>
         <module>chapters/chpt2</module>
+        <module>chapters/chpt3</module>
     </modules>
 
 

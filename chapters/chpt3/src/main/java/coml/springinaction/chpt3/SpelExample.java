@@ -1,4 +1,4 @@
 package coml.springinaction.chpt3;
 
-public @interface Cold {
+public class SpelExample {
 }

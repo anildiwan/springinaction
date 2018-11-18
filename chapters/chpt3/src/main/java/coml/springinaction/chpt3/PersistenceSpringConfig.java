@@ -1,7 +1,9 @@
 package coml.springinaction.chpt3;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jndi.JndiObjectFactoryBean;
@@ -9,11 +11,11 @@ import org.springframework.jndi.JndiObjectFactoryBean;
 import javax.sql.DataSource;
 
 @Configuration
+public class PersistenceSpringConfig {
 
-public class SpringConfig {
-    @Bean (destroyMethod = "shutdown")
+    @Bean(value = "dataSource", destroyMethod = "shutdown")
     @Profile("dev")
-    public DataSource dataSource() {
+    public DataSource embeddedDataSource() {
         return new EmbeddedDatabaseBuilder()
                 .addScript("classpath:schema.sql")
                 .addScript("classpath:test-data.sql")
@@ -21,9 +23,9 @@ public class SpringConfig {
 
     }
 
-    @Bean(destroyMethod = "close")
+    @Bean(value = "dataSource",destroyMethod = "close")
     @Profile("prod")
-    public DataSource dataSource () {
+    public DataSource jndiDataSource () {
         JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();
         jndiObjectFactoryBean.setJndiName("jdbc/myDS");
         jndiObjectFactoryBean.setResourceRef(true);
@@ -31,8 +33,4 @@ public class SpringConfig {
 
         return (DataSource) jndiObjectFactoryBean.getObject();
     }
-
-
-
-
 }
